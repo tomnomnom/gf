@@ -25,14 +25,14 @@ func main() {
 
 	homeDir, err := getHomeDir()
 	if err != nil {
-		fmt.Println("unable to open user's home directory")
+		fmt.Fprintln(os.Stderr, "unable to open user's home directory")
 		return
 	}
 
 	filename := fmt.Sprintf("%s/.gf/%s.json", homeDir, patName)
 	f, err := os.Open(filename)
 	if err != nil {
-		fmt.Println("no such pattern")
+		fmt.Fprintln(os.Stderr, "no such pattern")
 		return
 	}
 	defer f.Close()
@@ -42,7 +42,12 @@ func main() {
 	err = dec.Decode(&pat)
 
 	if err != nil {
-		fmt.Printf("pattern file '%s' is malformed: %s\n", filename, err)
+		fmt.Fprintf(os.Stderr, "pattern file '%s' is malformed: %s\n", filename, err)
+		return
+	}
+
+	if pat.Pattern == "" {
+		fmt.Fprintf(os.Stderr, "pattern file '%s' contains no pattern\n", filename)
 		return
 	}
 
