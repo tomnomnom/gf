@@ -47,8 +47,11 @@ base64       debug-pages  fw           php-curl     php-errors   php-sinks    ph
 To get auto-complete working you need to `source` the `gf-completion.bash` file in your `.bashrc` or similar:
 
 ```
-▶ echo 'source ~/path/to/gf-completion.bash' >> ~/.bashrc
+source ~/path/to/gf-completion.bash
 ```
+
+You'll need to `source` the file again manually, or restart your terminal after adding new pattern files.
+
 
 ## Install
 
@@ -58,4 +61,12 @@ If you've got Go installed and configured you can install `gf` with:
 ▶ go get -u github.com/tomnomnom/gf
 ```
 
+If you've installed using `go get`, you can enable auto-completion to your `.bashrc` like this:
+
+```
+▶ echo 'source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash' >> ~/.bashrc
+```
+
+Note that you'll have to restart your terminal, or run `source ~/.bashrc` for the changes to
+take effect.
 
