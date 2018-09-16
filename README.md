@@ -70,3 +70,18 @@ If you've installed using `go get`, you can enable auto-completion to your `.bas
 Note that you'll have to restart your terminal, or run `source ~/.bashrc` for the changes to
 take effect.
 
+To get started quickly, you can copy the example pattern files to `~/.gf` like this:
+
+```
+▶ cp -r $GOPATH/src/github.com/tomnomnom/gf/examples ~/.gf
+```
+
+My personal patterns that I've included as examples might not be very useful to you, but hopefully
+they're still a reasonable point of reference.
+
+## Contributing
+
+I'd actually be most interested in new pattern files! If you've got something you regularly grep for
+then feel free to issue a PR to add new pattern files to the examples directory.
+
+Bug fixes are also welcome as always :)
