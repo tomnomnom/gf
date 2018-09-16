@@ -116,7 +116,7 @@ func savePattern(name, flags, pat string) error {
 	defer f.Close()
 
 	enc := json.NewEncoder(f)
-	enc.SetIndent("", "  ")
+	enc.SetIndent("", "    ")
 
 	err = enc.Encode(p)
 	if err != nil {

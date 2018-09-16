@@ -63,8 +63,6 @@ To get auto-complete working you need to `source` the `gf-completion.bash` file 
 source ~/path/to/gf-completion.bash
 ```
 
-You'll need to `source` the file again manually, or restart your terminal after adding new pattern files.
-
 
 ## Install
 
