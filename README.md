@@ -33,7 +33,20 @@ The pattern definitions are stored in `~/.gf` as little JSON files that can be k
 }
 ```
 
-There are some example pattern files in the `examples` directory.
+To help reduce pattern length and complexity a little, you can specify a list of multiple patterns too:
+
+```
+▶ cat ~/.gf/php-sources-multiple.json
+{
+    "flags": "-HnrE",
+    "patterns": [
+        "\\$_(POST|GET|COOKIE|REQUEST|SERVER|FILES)",
+        "php://(input|stdin)"
+    ]
+}
+```
+
+There are some more example pattern files in the `examples` directory.
 
 ### Auto Complete
 
