@@ -14,7 +14,7 @@ or just generally dealing with large amounts of data. I often end up using fairl
 It's really easy to mess up when typing all of that, and it can be hard to know if you haven't got any
 results because there are non to find, or because you screwed up writing the pattern or chose the wrong flags.
 
-I wrote `gf` to gives names to the pattern and flag combinations I use all the time. So the above command
+I wrote `gf` to give names to the pattern and flag combinations I use all the time. So the above command
 becomes simply:
 
 ```
