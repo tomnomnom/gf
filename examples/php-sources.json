@@ -1,0 +1,4 @@
+{
+    "flags": "-HnrE",
+    "pattern": "(\\$_(POST|GET|COOKIE|REQUEST|SERVER|FILES)|php://(input|stdin))"
+}

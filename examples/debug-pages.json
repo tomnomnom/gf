@@ -1,0 +1,5 @@
+{
+    "flags": "-HnraiE",
+    "pattern": "(Application-Trace|Routing Error|DEBUG = True|Caused by:)"
+    
+}

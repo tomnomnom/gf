@@ -1,0 +1,5 @@
+{
+    "flags": "-HnriE",
+    "pattern": "(There is no app configured at that hostname|NoSuchBucket|No Such Account|You're Almost There|a GitHub Pages site here|this shop is currently unavailable|There's nothing here|The request could not be satisfied|project not found|Your CNAME settings|InvalidBucketName|PermanentRedirect|The specified bucket does not exist|Repository not found|Bad Request: ERROR: The request could not be satisfied|Sorry, We Couldn't Find That Page|Fastly error: unknown domain:|The feed has not been found.|The thing you were looking for is no longer here, or never was|Please renew your subscription|There isn't a Github Pages site here.|We could not find what you're looking for.|No settings were found for this company:|No such app|is not a registered InCloud YouTrack|Unrecognized domain|Sorry, this shop is currently unavailable.|You are being redirected|project not found|The requested URL was not found on this server.|This UserVoice subdomain is currently available!|Do you want to register|Help Center Closed)"
+}
+

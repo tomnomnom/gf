@@ -1,0 +1,4 @@
+{
+    "flags": "-HnriE",
+    "pattern": "[^a-z0-9_](system|exec|popen|pcntl_exec|eval|create_function) ?\\("
+}

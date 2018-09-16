@@ -1,0 +1,4 @@
+{
+    "flags": "-HnriE",
+    "pattern": "(django|laravel|symfony|graphite|grafana|drupal|struts|code ?igniter|cake ?php|grails|elastic ?search|kibana|log ?stash|tomcat|jenkins|hudson|jira)"
+}
