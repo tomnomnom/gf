@@ -7,11 +7,13 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
+	"strings"
 )
 
 type pattern struct {
-	Flags   string `json:"flags"`
-	Pattern string `json:"pattern"`
+	Flags    string   `json:"flags"`
+	Pattern  string   `json:"pattern"`
+	Patterns []string `json:"patterns"`
 }
 
 func main() {
@@ -47,8 +49,13 @@ func main() {
 	}
 
 	if pat.Pattern == "" {
-		fmt.Fprintf(os.Stderr, "pattern file '%s' contains no pattern\n", filename)
-		return
+		// check for multiple patterns
+		if len(pat.Patterns) == 0 {
+			fmt.Fprintf(os.Stderr, "pattern file '%s' contains no pattern(s)\n", filename)
+			return
+		}
+
+		pat.Pattern = "(" + strings.Join(pat.Patterns, "|") + ")"
 	}
 
 	cmd := exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
