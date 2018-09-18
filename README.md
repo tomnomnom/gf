@@ -48,6 +48,12 @@ To help reduce pattern length and complexity a little, you can specify a list of
 
 There are some more example pattern files in the `examples` directory.
 
+You can use the `-save` flag to create pattern files from the command line:
+
+```
+▶ gf -save php-serialized -HnrE '(a:[0-9]+:{|O:[0-9]+:"|s:[0-9]+:")'
+```
+
 ### Auto Complete
 
 There's an auto-complete script included, so you can hit 'tab' to show you what your options are:
