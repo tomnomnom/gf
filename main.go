@@ -21,7 +21,21 @@ type pattern struct {
 func main() {
 	var saveMode bool
 	flag.BoolVar(&saveMode, "save", false, "save a pattern (e.g: gf -save pat-name -Hnri 'search-pattern')")
+
+	var listMode bool
+	flag.BoolVar(&listMode, "list", false, "list available patterns")
 	flag.Parse()
+
+	if listMode {
+		pats, err := getPatterns()
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "%s\n", err)
+			return
+		}
+
+		fmt.Println(strings.Join(pats, "\n"))
+		return
+	}
 
 	if saveMode {
 		name := flag.Arg(0)
@@ -41,13 +55,13 @@ func main() {
 		files = "."
 	}
 
-	homeDir, err := getHomeDir()
+	patDir, err := getPatternDir()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "unable to open user's home directory")
+		fmt.Fprintln(os.Stderr, "unable to open user's pattern directory")
 		return
 	}
 
-	filename := fmt.Sprintf("%s/.gf/%s.json", homeDir, patName)
+	filename := filepath.Join(patDir, patName+".json")
 	f, err := os.Open(filename)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "no such pattern")
@@ -81,12 +95,12 @@ func main() {
 
 }
 
-func getHomeDir() (string, error) {
+func getPatternDir() (string, error) {
 	usr, err := user.Current()
 	if err != nil {
 		return "", err
 	}
-	return usr.HomeDir, nil
+	return filepath.Join(usr.HomeDir, ".gf"), nil
 }
 
 func savePattern(name, flags, pat string) error {
@@ -103,12 +117,12 @@ func savePattern(name, flags, pat string) error {
 		Pattern: pat,
 	}
 
-	home, err := getHomeDir()
+	patDir, err := getPatternDir()
 	if err != nil {
-		return fmt.Errorf("failed to determine home directory: %s", err)
+		return fmt.Errorf("failed to determine pattern directory: %s", err)
 	}
 
-	path := filepath.Join(home, ".gf", name+".json")
+	path := filepath.Join(patDir, name+".json")
 	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0666)
 	if err != nil {
 		return fmt.Errorf("failed to create pattern file: %s", err)
@@ -124,4 +138,26 @@ func savePattern(name, flags, pat string) error {
 	}
 
 	return nil
+}
+
+func getPatterns() ([]string, error) {
+	out := []string{}
+
+	patDir, err := getPatternDir()
+	if err != nil {
+		return out, fmt.Errorf("failed to determine pattern directory: %s", err)
+	}
+	_ = patDir
+
+	files, err := filepath.Glob(patDir + "/*.json")
+	if err != nil {
+		return out, err
+	}
+
+	for _, f := range files {
+		f = f[len(patDir)+1 : len(f)-5]
+		out = append(out, f)
+	}
+
+	return out, nil
 }
