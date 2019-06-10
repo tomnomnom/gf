@@ -51,7 +51,8 @@ func main() {
 
 	patName := flag.Arg(0)
 	files := flag.Arg(1)
-	if files == "" {
+	stat, _ := os.Stdin.Stat()
+	if files == "" && (stat.Mode() & os.ModeCharDevice) != 0{
 		files = "."
 	}
 
@@ -60,6 +61,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "unable to open user's pattern directory")
 		return
 	}
+
 
 	filename := filepath.Join(patDir, patName+".json")
 	f, err := os.Open(filename)
@@ -87,13 +89,18 @@ func main() {
 
 		pat.Pattern = "(" + strings.Join(pat.Patterns, "|") + ")"
 	}
-
-	cmd := exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	cmd.Run()
-
+	if files == "" {
+		cmd := exec.Command("grep", "--color", pat.Flags, pat.Pattern)
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
+	} else {
+		cmd := exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
+	}
 }
 
 func getPatternDir() (string, error) {
