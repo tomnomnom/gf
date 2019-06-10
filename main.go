@@ -88,7 +88,14 @@ func main() {
 		pat.Pattern = "(" + strings.Join(pat.Patterns, "|") + ")"
 	}
 
-	cmd := exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
+	var cmd *exec.Cmd
+	if stdinIsPipe() {
+		fmt.Println("is pipe")
+		cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern)
+	} else {
+		fmt.Println("is not pipe")
+		cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
+	}
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -161,4 +168,9 @@ func getPatterns() ([]string, error) {
 	}
 
 	return out, nil
+}
+
+func stdinIsPipe() bool {
+	stat, _ := os.Stdin.Stat()
+	return (stat.Mode() & os.ModeCharDevice) == 0
 }
