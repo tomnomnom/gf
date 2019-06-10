@@ -89,6 +89,7 @@ func main() {
 	}
 
 	cmd := exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
+	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
