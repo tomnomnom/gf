@@ -90,10 +90,8 @@ func main() {
 
 	var cmd *exec.Cmd
 	if stdinIsPipe() {
-		fmt.Println("is pipe")
 		cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern)
 	} else {
-		fmt.Println("is not pipe")
 		cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
 	}
 	cmd.Stdin = os.Stdin
