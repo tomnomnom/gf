@@ -106,7 +106,7 @@ func getPatternDir() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(usr.HomeDir, ".gf"), nil
+	return filepath.Join(usr.HomeDir, ".config/gf"), nil
 }
 
 func savePattern(name, flags, pat string) error {
