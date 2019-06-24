@@ -106,7 +106,12 @@ func getPatternDir() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(usr.HomeDir, ".config/gf"), nil
+	path := filepath.Join(usr.HomeDir, ".config/gf")
+	if _, err := os.Stat(path); !os.IsNotExist(err) {
+		// .config/gf exists
+		return path, nil
+	}
+	return filepath.Join(usr.HomeDir, ".gf"), nil
 }
 
 func savePattern(name, flags, pat string) error {
