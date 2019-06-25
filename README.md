@@ -63,10 +63,22 @@ There's an auto-complete script included, so you can hit 'tab' to show you what 
 base64       debug-pages  fw           php-curl     php-errors   php-sinks    php-sources  sec          takeovers    urls
 ```
 
+#### Bash
+
 To get auto-complete working you need to `source` the `gf-completion.bash` file in your `.bashrc` or similar:
 
 ```
 source ~/path/to/gf-completion.bash
+```
+
+#### Zsh
+
+To get auto-complete working you need to enable autocomplete (not needed if you have oh-my-zsh) using `autoload -U compaudit && compinit` or by putting it into `.zshrc`
+
+Then `source` the `gf-completion.zsh` file in your `.zshrc` or similar:
+
+```
+source ~/path/to/gf-completion.zsh
 ```
 
 
