@@ -24,6 +24,10 @@ func main() {
 
 	var listMode bool
 	flag.BoolVar(&listMode, "list", false, "list available patterns")
+
+	var dumpMode bool
+	flag.BoolVar(&dumpMode, "dump", false, "prints the grep command rather than executing it")
+
 	flag.Parse()
 
 	if listMode {
@@ -88,16 +92,22 @@ func main() {
 		pat.Pattern = "(" + strings.Join(pat.Patterns, "|") + ")"
 	}
 
-	var cmd *exec.Cmd
-	if stdinIsPipe() {
-		cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern)
+	if dumpMode {
+		fmt.Printf( "grep --color %v %q %v\n", pat.Flags, pat.Pattern, files )
+		//fmt.Println( "grep --color", pat.Flags, pat.Pattern, files)
+
 	} else {
-		cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
+		var cmd *exec.Cmd
+		if stdinIsPipe() {
+			cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern)
+		} else {
+			cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
+		}
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
 	}
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	cmd.Run()
 
 }
 
