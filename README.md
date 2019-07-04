@@ -81,6 +81,9 @@ Then `source` the `gf-completion.zsh` file in your `.zshrc` or similar:
 source ~/path/to/gf-completion.zsh
 ```
 
+Note: if you're using oh-my-zsh or similar you may find that `gf` is an alias for `git fetch`. You can either
+alias the gf binary to something else, or `unalias gf` to remove the `git fetch` alias.
+
 
 ## Install
 
