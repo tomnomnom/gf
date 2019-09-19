@@ -28,6 +28,9 @@ func main() {
 	var dumpMode bool
 	flag.BoolVar(&dumpMode, "dump", false, "prints the grep command rather than executing it")
 
+	var streamMode bool
+	flag.BoolVar(&streamMode, "stream", false, "sets gf in stream mode")
+
 	flag.Parse()
 
 	if listMode {
@@ -90,6 +93,12 @@ func main() {
 		}
 
 		pat.Pattern = "(" + strings.Join(pat.Patterns, "|") + ")"
+	}
+
+	if streamMode {
+		// for stream mode, remove the recursive flag ("r") and filename ("H") which is always stdin
+		pat.Flags = strings.Replace(pat.Flags,"r","", -1)
+		pat.Flags = strings.Replace(pat.Flags,"H","", -1)
 	}
 
 	if dumpMode {
