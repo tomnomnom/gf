@@ -26,7 +26,8 @@
         "project not found",
         "This UserVoice subdomain is currently available!",
         "Do you want to register",
-        "Help Center Closed"
+        "Help Center Closed",
+        "The request could not be satisfied"                                                                                                
     ]
 }
 
