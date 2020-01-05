@@ -1,0 +1,25 @@
+{
+    "flags": "-HnriE",
+    "patterns": [
+      "website_endpoint",
+      "<phpunit",
+      "/var/run/",
+      "vim-",
+      "yarn lockfile",
+      "<project version",
+      'autoload',
+      "provider: virtualbox",
+      "VAGRANTFILE_API_VERSION",
+      "ssh-rsa",
+      "<system.webServer>",
+      "phpinfo()",
+      "refs/heads/master",
+      "Apache Server Information",
+      "timestamp",
+      "resourceHandlerMapping",
+      "_links",
+      "has-props",
+      "Bud1",
+      "WPE_VENDOR"
+    ]
+}
