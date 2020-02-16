@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"os/user"
 	"path/filepath"
+	"runtime"
 	"strings"
 )
 
@@ -27,6 +28,11 @@ func main() {
 
 	var dumpMode bool
 	flag.BoolVar(&dumpMode, "dump", false, "prints the grep command rather than executing it")
+
+	var colorFlag string
+	if (runtime.GOOS != "openbsd") {
+		colorFlag = "--color"
+	}
 
 	flag.Parse()
 
@@ -93,15 +99,15 @@ func main() {
 	}
 
 	if dumpMode {
-		fmt.Printf( "grep --color %v %q %v\n", pat.Flags, pat.Pattern, files )
+		fmt.Printf( "grep %v %v %q %v\n", colorFlag, pat.Flags, pat.Pattern, files )
 		//fmt.Println( "grep --color", pat.Flags, pat.Pattern, files)
 
 	} else {
 		var cmd *exec.Cmd
 		if stdinIsPipe() {
-			cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern)
+			cmd = exec.Command("grep" + colorFlag, pat.Flags, pat.Pattern)
 		} else {
-			cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
+			cmd = exec.Command("grep" + colorFlag, pat.Flags, pat.Pattern, files)
 		}
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
