@@ -16,6 +16,7 @@ type pattern struct {
 	Flags    string   `json:"flags,omitempty"`
 	Pattern  string   `json:"pattern,omitempty"`
 	Patterns []string `json:"patterns,omitempty"`
+	Engine   string   `json:"engine,omitempty"`
 }
 
 func main() {
@@ -27,9 +28,6 @@ func main() {
 
 	var dumpMode bool
 	flag.BoolVar(&dumpMode, "dump", false, "prints the grep command rather than executing it")
-
-	var engine string
-	flag.StringVar(&engine, "engine", "grep", "uses a different engine instead of grep e.g. ag")
 
 	flag.Parse()
 
@@ -102,8 +100,8 @@ func main() {
 	} else {
 		var cmd *exec.Cmd
 		operator := "grep"
-		if engine != "" {
-			operator = engine
+		if pat.Engine != "" {
+			operator = pat.Engine
 		}
 
 		if stdinIsPipe() {
