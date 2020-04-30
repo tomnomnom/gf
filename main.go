@@ -28,6 +28,9 @@ func main() {
 	var dumpMode bool
 	flag.BoolVar(&dumpMode, "dump", false, "prints the grep command rather than executing it")
 
+	var engine string
+	flag.StringVar(&engine, "engine", "grep", "uses a different engine instead of grep e.g. ag")
+
 	flag.Parse()
 
 	if listMode {
