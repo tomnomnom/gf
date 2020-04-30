@@ -26,7 +26,7 @@ becomes simply:
 The pattern definitions are stored in `~/.gf` as little JSON files that can be kept under version control:
 
 ```
-▶ cat ~/.gf/php-sources.json 
+▶ cat ~/.gf/php-sources.json
 {
     "flags": "-HnrE",
     "pattern": "(\\$_(POST|GET|COOKIE|REQUEST|SERVER|FILES)|php://(input|stdin))"
@@ -83,6 +83,19 @@ source ~/path/to/gf-completion.zsh
 
 Note: if you're using oh-my-zsh or similar you may find that `gf` is an alias for `git fetch`. You can either
 alias the gf binary to something else, or `unalias gf` to remove the `git fetch` alias.
+
+### Using custom engines
+
+There are some amazing code searching engines out there that can be a better replacement for grep.
+A good example is [the silver searcher](https://github.com/ggreer/the_silver_searcher).
+It's faster (like **way faster**) and presents the results in a more visually digestible manner.
+In order to utilize a different engine, use `-engine` and provide a different tool like so:
+```bash
+# Using the silver searcher instead of grep
+gf -engine ag api-keys
+```
+* Note I: Different engines use different flags, so in the example above, the flag `E` has to be removed from the `api-keys.json` file in order of ag to successfully run.
+* Note II: You'd probably want to `alias <command>='gf -engine <engine>'` if you plan to use this regularly.
 
 
 ## Install
