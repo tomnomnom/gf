@@ -94,8 +94,7 @@ func main() {
 	}
 
 	if dumpMode {
-		fmt.Printf("grep --color %v %q %v\n", pat.Flags, pat.Pattern, files)
-		//fmt.Println( "grep --color", pat.Flags, pat.Pattern, files)
+		fmt.Printf("grep %v %q %v\n", pat.Flags, pat.Pattern, files)
 
 	} else {
 		var cmd *exec.Cmd
@@ -105,9 +104,9 @@ func main() {
 		}
 
 		if stdinIsPipe() {
-			cmd = exec.Command(operator, "--color", pat.Flags, pat.Pattern)
+			cmd = exec.Command(operator, pat.Flags, pat.Pattern)
 		} else {
-			cmd = exec.Command(operator, "--color", pat.Flags, pat.Pattern, files)
+			cmd = exec.Command(operator, pat.Flags, pat.Pattern, files)
 		}
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
