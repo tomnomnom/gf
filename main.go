@@ -16,6 +16,7 @@ type pattern struct {
 	Flags    string   `json:"flags,omitempty"`
 	Pattern  string   `json:"pattern,omitempty"`
 	Patterns []string `json:"patterns,omitempty"`
+	Engine   string   `json:"engine,omitempty"`
 }
 
 func main() {
@@ -93,15 +94,20 @@ func main() {
 	}
 
 	if dumpMode {
-		fmt.Printf( "grep --color %v %q %v\n", pat.Flags, pat.Pattern, files )
+		fmt.Printf("grep --color %v %q %v\n", pat.Flags, pat.Pattern, files)
 		//fmt.Println( "grep --color", pat.Flags, pat.Pattern, files)
 
 	} else {
 		var cmd *exec.Cmd
+		operator := "grep"
+		if pat.Engine != "" {
+			operator = pat.Engine
+		}
+
 		if stdinIsPipe() {
-			cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern)
+			cmd = exec.Command(operator, "--color", pat.Flags, pat.Pattern)
 		} else {
-			cmd = exec.Command("grep", "--color", pat.Flags, pat.Pattern, files)
+			cmd = exec.Command(operator, "--color", pat.Flags, pat.Pattern, files)
 		}
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout

@@ -26,7 +26,7 @@ becomes simply:
 The pattern definitions are stored in `~/.gf` as little JSON files that can be kept under version control:
 
 ```
-▶ cat ~/.gf/php-sources.json 
+▶ cat ~/.gf/php-sources.json
 {
     "flags": "-HnrE",
     "pattern": "(\\$_(POST|GET|COOKIE|REQUEST|SERVER|FILES)|php://(input|stdin))"
@@ -83,6 +83,24 @@ source ~/path/to/gf-completion.zsh
 
 Note: if you're using oh-my-zsh or similar you may find that `gf` is an alias for `git fetch`. You can either
 alias the gf binary to something else, or `unalias gf` to remove the `git fetch` alias.
+
+### Using custom engines
+
+There are some amazing code searching engines out there that can be a better replacement for grep.
+A good example is [the silver searcher](https://github.com/ggreer/the_silver_searcher).
+It's faster (like **way faster**) and presents the results in a more visually digestible manner.
+In order to utilize a different engine, add `engine: <other tool>` to the relevant pattern file:
+```bash
+# Using the silver searcher instead of grep for the aws-keys pattern:
+# 1. Adding "ag" engine
+# 2. Removing the E flag which is irrelevant for ag
+{
+  "engine": "ag",
+  "flags": "-Hanr",
+  "pattern": "([^A-Z0-9]|^)(AKIA|A3T|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{12,}"
+}
+```
+* Note: Different engines use different flags, so in the example above, the flag `E` has to be removed from the `aws-keys.json` file in order for ag to successfully run.
 
 
 ## Install
