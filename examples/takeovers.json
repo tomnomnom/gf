@@ -26,7 +26,17 @@
         "project not found",
         "This UserVoice subdomain is currently available!",
         "Do you want to register",
-        "Help Center Closed"
+        "Help Center Closed",
+        "Vulnerable	Trying to access your account?",
+        "Vulnerable	404 Not Found",
+        "404 Not Found",
+        "404 Blog is not found",
+        "Uh oh. That page doesn't exist.",
+        "It looks like you may have taken a wrong turn somewhere.",
+        "404 error unknown site!",
+        "Project doesnt exist",
+        "Whatever you were looking for doesn't currently exist at this address",
+        "page not found"
     ]
 }
 
