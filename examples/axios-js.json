@@ -1,0 +1,13 @@
+{
+    "flags": "-HnriE",
+    "patterns": [
+        "axios.request",
+		"axios.get",
+		"axios.delete",
+		"axios.head",
+		"axios.options",
+		"axios.post",
+		"axios.put",
+		"axios.patch"
+    ]
+}
