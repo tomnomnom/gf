@@ -1,0 +1,4 @@
+{
+    "flags": "-HanriE",
+    "pattern": "(Microsoft OLE DB Provider for ODBC Drivers error|You have an error in your SQL syntax|ORA-00933: SQL command not properly ended|Microsoft SQL Native Client error|Query failed: ERROR: syntax error at or near|You have an error in your SQL syntax|MySQL Error: 1064\" & \"Session halted|mysql error with query|sQL syntax error|PostgreSQL query failed: ERROR: parser: parse error|Warning: mysql_fetch_array|Warning: mysql_num_rows|Warning: mysql_query|Warning: mysql_fetch_assoc|Warning: mysql_result|Warning: mysql_free_result)"
+}
