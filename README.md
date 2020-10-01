@@ -1,4 +1,4 @@
-# gf
+# GF
 
 A wrapper around grep to avoid typing common patterns.
 
