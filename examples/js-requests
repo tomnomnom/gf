@@ -1,0 +1,4 @@
+{
+    "flags": "-HEnri",
+    "pattern": "application/(json|x-www-form-urlencoded)|XMLHttpRequest|text/plain|multipart/form-data"
+}
