@@ -1,0 +1,4 @@
+{
+    "flags": "-HnrE",
+    "pattern": "concat\\([[:alnum:]]*\\)|replace\\([[:alnum:]]*\\)|\\${[[:alnum:]]*}"
+}
