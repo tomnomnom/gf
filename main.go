@@ -104,7 +104,7 @@ func main() {
 		}
 
 		if stdinIsPipe() {
-			cmd = exec.Command(operator, pat.Flags, pat.Pattern)
+			cmd = exec.Command(operator, pat.Flags, pat.Pattern, "-")
 		} else {
 			cmd = exec.Command(operator, pat.Flags, pat.Pattern, files)
 		}
