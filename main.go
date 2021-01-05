@@ -92,22 +92,27 @@ func main() {
 
 		pat.Pattern = "(" + strings.Join(pat.Patterns, "|") + ")"
 	}
+	
+	operator := "grep"
+	if pat.Engine != "" {
+		operator = pat.Engine
+	}
 
 	if dumpMode {
-		fmt.Printf("grep %v %q %v\n", pat.Flags, pat.Pattern, files)
+		fmt.Printf("%v %v %q %v\n", operator, pat.Flags, pat.Pattern, files)
 
 	} else {
 		var cmd *exec.Cmd
-		operator := "grep"
-		if pat.Engine != "" {
-			operator = pat.Engine
+
+		// combining flags, patterns and files into single slice
+		arguments := strings.Fields(pat.Flags)
+		arguments = append(arguments, pat.Pattern)
+
+		if !stdinIsPipe() {
+			arguments = append(arguments, files)
 		}
 
-		if stdinIsPipe() {
-			cmd = exec.Command(operator, pat.Flags, pat.Pattern)
-		} else {
-			cmd = exec.Command(operator, pat.Flags, pat.Pattern, files)
-		}
+		cmd = exec.Command(operator, arguments...)
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
