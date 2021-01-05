@@ -104,11 +104,15 @@ func main() {
 	} else {
 		var cmd *exec.Cmd
 
-		if stdinIsPipe() {
-			cmd = exec.Command(operator, pat.Flags, pat.Pattern)
-		} else {
-			cmd = exec.Command(operator, pat.Flags, pat.Pattern, files)
+		// combining flags, patterns and files into single slice
+		arguments := strings.Fields(pat.Flags)
+		arguments = append(arguments, pat.Pattern)
+
+		if !stdinIsPipe() {
+			arguments = append(arguments, files)
 		}
+
+		cmd = exec.Command(operator, arguments...)
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
