@@ -92,16 +92,17 @@ func main() {
 
 		pat.Pattern = "(" + strings.Join(pat.Patterns, "|") + ")"
 	}
+	
+	operator := "grep"
+	if pat.Engine != "" {
+		operator = pat.Engine
+	}
 
 	if dumpMode {
-		fmt.Printf("grep %v %q %v\n", pat.Flags, pat.Pattern, files)
+		fmt.Printf("%v %v %q %v\n", operator, pat.Flags, pat.Pattern, files)
 
 	} else {
 		var cmd *exec.Cmd
-		operator := "grep"
-		if pat.Engine != "" {
-			operator = pat.Engine
-		}
 
 		if stdinIsPipe() {
 			cmd = exec.Command(operator, pat.Flags, pat.Pattern)
