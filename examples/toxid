@@ -1,0 +1,4 @@
+{
+    "flags": "-HnrioE",
+    "pattern":"[0-9a-f]{76}$"
+}
